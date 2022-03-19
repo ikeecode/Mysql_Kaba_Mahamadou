@@ -1,5 +1,8 @@
 from sys import exit
 from themenu import menu
+import mysql.connector as mc
+
+
 
 def affiche_menu(list_menu):
     for ind, item in enumerate(list_menu):
@@ -28,10 +31,17 @@ def launcher(in_menu):
                 launcher(copy_menus)
             elif choice.lower() != 'q':
                 try:
-                    choice = int(choice)
-                    popped = copy_menus.pop(int(choice) - 1)
-                    menus_popped.append(popped)
-                    print(menu.sql_requests.get(popped))
+                    with mc.connect(option_files="my1.ini") as mydb:
+                        mycursor = mydb.cursor()
+                        choice = int(choice)
+                        popped = copy_menus.pop(int(choice) - 1)
+                        menus_popped.append(popped)
+                        selected = menu.sql_requests.get(popped)
+                        print(selected)
+                        mycursor.execute(selected)
+                        result = mycursor.fetchall()
+                        for res in result:
+                            print(res)
                 except:
                     launcher(copy_menus)
 

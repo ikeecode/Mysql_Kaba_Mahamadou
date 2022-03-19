@@ -32,6 +32,6 @@ class menu:
             "Lister tous les caissiers par ordre croissant de leur nom" : "SELECT u.nom_USER FROM PROFIL p, USERS u WHERE p.libelle_PROFIL = 'caissier'",
             "Lister tous chef d’agence ainsi que l'adresse de l’agence" : "SELECT  nom_USER FROM USERS, AGENCE, PROFIL WHERE libelle_PROFIL like '%chef agence%' AND id_USER = id_USER_USER",
             "Lister les comptes de transaction de l’agence Plateau par ordre croissant du solde" : "SELECT DISTINCT numero, solde_COMPTE_TRANSACTION, adresse_AGENCE FROM COMPTE_TRANSACTION, AGENCE, TRANSACTIONS WHERE numero_AGENCE = numero_AGENCE_AGENCE AND adresse_AGENCE like '%American%' ORDER BY solde_COMPTE_TRANSACTION",
-            "Lister la somme des montants déposés par un caissier dans un compte de transaction de l’agence dont le chef est moussa dop par ordre croissant du montant" : ,
+            "Lister la somme des montants déposés par un caissier dans un compte de transaction de l’agence dont le chef est moussa dop par ordre croissant du montant" : "",
 
             } #ce dico va recevoir les elements de menus comme clés et les valeurs seront les requetes sql correspondantes
