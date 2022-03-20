@@ -9,10 +9,11 @@ def affiche_menu(list_menu):
         print(f"{ind + 1}   | {item} ")
 
 choice = ''
-menus_popped = []
+# menus_popped = []
 
 in_menu = menu.menus.copy()
 def launcher(in_menu):
+    menus_popped = []
     global copy_menus
     try:
         copy_menus = in_menu.copy()
@@ -40,8 +41,12 @@ def launcher(in_menu):
                         print(selected)
                         mycursor.execute(selected)
                         result = mycursor.fetchall()
+                        mx = max([len(str(r)) for r in result])
+                        print()
                         for res in result:
+                            print(mx * '_')
                             print(res)
+                        print()
                 except:
                     launcher(copy_menus)
 
