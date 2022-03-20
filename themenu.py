@@ -32,6 +32,13 @@ class menu:
             "Lister tous les caissiers par ordre croissant de leur nom" : "SELECT u.nom_USER FROM PROFIL p, USERS u WHERE p.libelle_PROFIL = 'caissier'",
             "Lister tous chef d’agence ainsi que l'adresse de l’agence" : "SELECT  nom_USER FROM USERS, AGENCE, PROFIL WHERE libelle_PROFIL like '%chef agence%' AND id_USER = id_USER_USER",
             "Lister les comptes de transaction de l’agence Plateau par ordre croissant du solde" : "SELECT DISTINCT numero, solde_COMPTE_TRANSACTION, adresse_AGENCE FROM COMPTE_TRANSACTION, AGENCE, TRANSACTIONS WHERE numero_AGENCE = numero_AGENCE_AGENCE AND adresse_AGENCE like '%American%' ORDER BY solde_COMPTE_TRANSACTION",
-            "Lister la somme des montants déposés par un caissier dans un compte de transaction de l’agence dont le chef est moussa dop par ordre croissant du montant" : "",
+            "Lister la somme des montants déposés par un caissier dans un compte de transaction de l’agence dont le chef est moussa dop par ordre croissant du montant" : """SELECT SUM(montant_TRANSACTION) AS SOMME, id_USER, nom_USER FROM USERS, TRANSACTIONS, PROFIL, AGENCE WHERE TRANSACTIONS.id_USER_USER = USERS.id_USER AND PROFIL.libelle_PROFIL
+                                                                                                                                                                            LIKE '%caissier%' AND AGENCE.numero_AGENCE = ( SELECT numero FROM COMPTE_TRANSACTION, TRANSACTIONS, USERS, AGENCE
+                                                                                                                                                                            WHERE COMPTE_TRANSACTION.numero = TRANSACTIONS.numero_COMPTE_TRANSACTION AND TRANSACTIONS.id_USER_USER  = USERS.id_USER AND TRANSACTIONS.numero_AGENCE_AGENCE = AGENCE.numero_AGENCE
+                                                                                                                                                                            AND USERS.nom_USER LIKE '%moussa%' ) GROUP BY TRANSACTIONS.id_USER_USER ORDER BY SOMME""",
+            "Lister les utilisateurs de l’agence Plateau" : "SELECT nom_USER FROM USERS, PROFIL, AGENCE  WHERE  id_PROFIL_PROFIL = id_PROFIL AND  libelle_PROFIL LIKE '%UTILISATEUR%' AND numero_AGENCE_AGENCE  = numero_AGENCE and adresse_AGENCE LIKE '%PLATEAU%'",
+            "Lister le nombre de compte par agence" : "SELECT COUNT(*), adresse_AGENCE  FROM USERS, AGENCE WHERE numero_AGENCE = numero_AGENCE_AGENCE  GROUP BY numero_AGENCE_AGENCE ",
+
+
 
             } #ce dico va recevoir les elements de menus comme clés et les valeurs seront les requetes sql correspondantes
