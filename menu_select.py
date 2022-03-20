@@ -43,9 +43,10 @@ def launcher(in_menu):
                         result = mycursor.fetchall()
                         mx = max([len(str(r)) for r in result])
                         print()
-                        for res in result:
-                            print(mx * '_')
-                            print(res)
+                        affiche_menu(result)
+                        # for res in result:
+                        #     print(mx * '_')
+                        #     print(res)
                         print()
                 except:
                     launcher(copy_menus)

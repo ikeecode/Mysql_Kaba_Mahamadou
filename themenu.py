@@ -7,8 +7,8 @@ class menu:
             "Lister la somme des montants déposés par un caissier dans un compte de transaction de l’agence dont le chef est dunbar par ordre croissant du montant",
             "Lister les utilisateurs de l’agence Plateau",
             "Lister le nombre de compte par agence",
-            "Lister les comptes affectés à l’utilisateur dunbar durant le mois de Mai 2021",
-            # "Lister les utilisateurs à qui on a affecté le compte numéro 001 durant année 2021",
+            "Lister les comptes affectés à l’utilisateur DUERDIN durant le mois de Mai 2021",
+            "Lister les utilisateurs à qui on a affecté le compte numéro 001 durant année 2021",
             # "Lister le montant des transactions effectué par utilisateur et par date dans l’agence dont le numéro est 001",
             # "Lister le nombre d’affectation par utilisateur et numéro de compte durant le premier trimestre de l’année 2021\npar ordre croissant de ce nombre d’affectation dans l’agence dont le numéro est 001",
             # "Lister les dépôts effectués et les retraits par jour dans l’agence dont le chef est dunbar par ordre croissant du montant",
@@ -38,7 +38,7 @@ class menu:
                                                                                                                                                                             AND USERS.nom_USER LIKE '%moussa%' ) GROUP BY TRANSACTIONS.id_USER_USER ORDER BY SOMME""",
             "Lister les utilisateurs de l’agence Plateau" : "SELECT nom_USER FROM USERS, PROFIL, AGENCE  WHERE  id_PROFIL_PROFIL = id_PROFIL AND  libelle_PROFIL LIKE '%UTILISATEUR%' AND numero_AGENCE_AGENCE  = numero_AGENCE and adresse_AGENCE LIKE '%PLATEAU%'",
             "Lister le nombre de compte par agence" : "SELECT COUNT(*), adresse_AGENCE  FROM USERS, AGENCE WHERE numero_AGENCE = numero_AGENCE_AGENCE  GROUP BY numero_AGENCE_AGENCE ",
-            "Lister les comptes affectés à l’utilisateur dunbar durant le mois de Mai 2021" : "",
-
+            "Lister les comptes affectés à l’utilisateur DUERDIN durant le mois de Mai 2021" : "SELECT DISTINCT numero, nom_USER, DAY(dateCreattion_COMPTE_TRANSACTION) AS day , MONTH(dateCreattion_COMPTE_TRANSACTION) FROM COMPTE_TRANSACTION, USERS, TRANSACTIONS, PROFIL WHERE  USERS.id_USER = TRANSACTIONS.id_USER_USER  AND id_PROFIL = id_PROFIL_PROFIL AND libelle_PROFIL LIKE '%utilisateur%' AND MONTH(dateCreattion_COMPTE_TRANSACTION) = 5 AND nom_USER LIKE '%DUERDIN%' ORDER BY day",
+            "Lister les utilisateurs à qui on a affecté le compte numéro 001 durant année 2021" : "SELECT DISTINCT nom_USER,numero  FROM COMPTE_TRANSACTION, USERS, TRANSACTIONS, PROFIL WHERE  USERS.id_USER = TRANSACTIONS.id_USER_USER AND id_PROFIL = id_PROFIL_PROFIL AND libelle_PROFIL LIKE '%utilisateur%' AND COMPTE_TRANSACTION.numero = 1",
 
             } #ce dico va recevoir les elements de menus comme clés et les valeurs seront les requetes sql correspondantes
